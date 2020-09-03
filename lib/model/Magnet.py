@@ -31,7 +31,7 @@ class Magnet:
         return self
 
     def keyword(self) -> str:
-        return "torrent %s \"magnet:\"" % self._keyword
+        return "torrent \"%s\" \"magnet:\" -xxx" % self._keyword
 
     def get_url(self) -> str:
         return self._url
