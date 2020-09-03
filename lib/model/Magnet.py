@@ -25,7 +25,7 @@ class Magnet:
         self._url = url
         self._title = title
         self._image = image
-        self._links = re.findall(r"(magnet:.*?)[\"|\']", content.decode('utf-8'))
+        self._links = re.findall(r"(magnet:.*?)[\"|\']", content)
         self._new = True
 
         return self

@@ -13,18 +13,19 @@ def search_magnet_links(magnet: Magnet) -> Magnet:
       return magnet_from_cache
 
     try:
-      html = get_page(url)
-    except:
-      print(' - Notice: URL or something failed, skipping...')
+      raw = get_page(url)
+      html = raw.decode('utf-8')
+    except Exception as err:
+      print("- Error: {0}".format(err))
       continue
 
     if not html:
       continue
 
     magnet = magnet.update_from_url_content(url=url, content=html)
-    if not magnet.has_links():
-      continue
-
-    repository.save(magnet)
-    
+    if magnet.has_links():
+      repository.save(magnet)
+      
+      return magnet
+       
   return magnet
