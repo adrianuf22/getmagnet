@@ -1,12 +1,15 @@
 from googlesearch import search, get_page
 from lib.model.Magnet import Magnet
+from urllib.parse import urlparse, parse_qs, urlunparse, urlencode
 from lib.model.service.MagnetRepository import MagnetRepository
 from typing import Union
 
 def search_magnet_links(magnet: Magnet) -> Magnet:
   repository = MagnetRepository()
 
-  for url in search(magnet.keyword(), tld="com", num=10, stop=10, pause=10):
+  for dirty_url in search(magnet.keyword(), tld="com", num=10, stop=10, pause=10):
+    url = _sanitize_url(dirty_url)
+
     magnet_from_cache = repository.findByUrl(url)
 
     if magnet_from_cache is not None:
@@ -29,3 +32,14 @@ def search_magnet_links(magnet: Magnet) -> Magnet:
       return magnet
        
   return magnet
+
+def _sanitize_url(dirty_url) -> str:
+  parsedUrl = urlparse(dirty_url)
+  queryStrings = parse_qs(parsedUrl.query)
+  if 'ved' in queryStrings:
+      del queryStrings['ved']
+
+  urlParts = list(parsedUrl)
+  urlParts[4] = urlencode(queryStrings)
+
+  return urlunparse(urlParts)
