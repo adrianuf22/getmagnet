@@ -13,6 +13,9 @@ def search_magnet_links(magnet: Magnet) -> Magnet:
     magnet_from_cache = repository.findByUrl(url)
 
     if magnet_from_cache is not None:
+      if magnet_from_cache.is_offline():
+        continue
+
       return magnet_from_cache
 
     try:
