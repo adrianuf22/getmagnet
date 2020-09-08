@@ -13,7 +13,14 @@ class Magnet:
 
     @classmethod
     def from_dict(cls, raw_magnet: dict) -> 'Magnet':
-        return cls(raw_magnet.keyword, raw_magnet.url, raw_magnet.title, raw_magnet.image, raw_magnet.links, raw_magnet.offline)
+        return cls(
+            raw_magnet.get('keyword'),
+            raw_magnet.get('url'),
+            raw_magnet.get('title'),
+            raw_magnet.get('image'),
+            raw_magnet.get('links'),
+            raw_magnet.get('offline')
+        )
 
     @classmethod
     def create_empty(cls, keyword: str) -> 'Magnet':
