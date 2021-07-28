@@ -1,5 +1,7 @@
 # getmagnet
 
+Searchs for magnet links using Google search.
+
 ---
 
 ## Releases
