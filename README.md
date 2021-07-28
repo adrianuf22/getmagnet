@@ -6,7 +6,7 @@
 
 ### v0.1.0
 
-- [x] Search torrent on Google (torrent [movie name] magnet:)
+- [x] Search torrent on Google (torrent [file name] magnet:)
   - [x] Search magnet links in search results
   - [x] Use Python3 (re, urllib) to request and search regex in html (r"magnet:.*?\"")
 - [x] Send magnet link to transmission-daemon
