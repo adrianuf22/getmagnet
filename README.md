@@ -25,6 +25,7 @@ Searchs for magnet links using Google search.
 
 - [x] Web API
 - [x] Web client
+- 
 
 ### v0.3.0
 
